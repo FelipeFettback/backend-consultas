@@ -26,5 +26,7 @@ public class PacienteService {
     public Paciente getById(Long id) {
         return repository.getReferenceById(id);
     }
-
+    public void deleteById(Long id){
+        repository.deleteById(id);
+    }
 }

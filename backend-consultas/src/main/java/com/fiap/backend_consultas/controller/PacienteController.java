@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/especialidades")
+@RequestMapping("/pacientes")
 @CrossOrigin
 public class PacienteController {
     private final PacienteService service;
@@ -23,5 +23,13 @@ public class PacienteController {
     @GetMapping("/by-id/{id}")
     public Paciente getById(@PathVariable Long id) {
         return service.getById(id);
+    }
+    @DeleteMapping("delete-by-id/{id}")
+    public void deleteById(@PathVariable Long id) {
+        service.deleteById(id);
+    }
+    @GetMapping
+    public List<Paciente> listar() {
+        return service.listar();
     }
 }

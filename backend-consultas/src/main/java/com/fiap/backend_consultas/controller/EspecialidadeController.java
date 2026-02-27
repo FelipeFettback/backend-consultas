@@ -1,6 +1,6 @@
 package com.fiap.backend_consultas.controller;
-import com.fiap.ec.backend_consultas.model.Especialidade;
-import com.fiap.ec.backend_consultas.service.EspecialidadeService;
+import com.fiap.backend_consultas.model.Especialidade;
+import com.fiap.backend_consultas.service.EspecialidadeService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController

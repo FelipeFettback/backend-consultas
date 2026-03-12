@@ -24,8 +24,19 @@ public class PacienteService {
     }
 
     public Paciente getById(Long id) {
-        return repository.getReferenceById(id);
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Não encontrado."));
     }
+    public Paciente atualizar(Long id, Paciente pacienteAtualizado) {
+        Paciente pacienteExistente = getById(id);
+        pacienteExistente.setNome(pacienteAtualizado.getNome());
+        pacienteExistente.setCpf(pacienteAtualizado.getCpf());
+        pacienteExistente.setEmail(pacienteAtualizado.getEmail());
+        pacienteExistente.setTelefone(pacienteAtualizado.getTelefone());
+        pacienteExistente.setDataNascimento(pacienteAtualizado.getDataNascimento());
+        pacienteExistente.setAtivo(pacienteAtualizado.getAtivo());
+        return repository.save(pacienteExistente);
+    }
+
     public void deleteById(Long id){
         repository.deleteById(id);
     }

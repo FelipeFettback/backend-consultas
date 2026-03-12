@@ -32,4 +32,6 @@ public class PacienteController {
     public List<Paciente> listar() {
         return service.listar();
     }
+    @PutMapping("/{id}")
+    public Paciente atualizar(@PathVariable Long id, @RequestBody Paciente paciente) { return service.atualizar(id, paciente); }
 }

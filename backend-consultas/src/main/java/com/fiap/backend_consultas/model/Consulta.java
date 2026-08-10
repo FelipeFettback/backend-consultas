@@ -1,4 +1,4 @@
-package com.fiap.ec.backend_consultas.model;
+package com.fiap.backend_consultas.model;
 
 import java.time.LocalDateTime;
 

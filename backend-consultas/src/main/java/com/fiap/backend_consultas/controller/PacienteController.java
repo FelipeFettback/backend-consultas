@@ -1,13 +1,17 @@
 package com.fiap.backend_consultas.controller;
-
-import com.fiap.backend_consultas.model.Especialidade;
-import com.fiap.backend_consultas.model.Paciente;
-import com.fiap.backend_consultas.service.EspecialidadeService;
-import com.fiap.backend_consultas.service.PacienteService;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fiap.backend_consultas.exception.RecursoNaoEncontradoException;
+import com.fiap.backend_consultas.model.Paciente;
+import com.fiap.backend_consultas.service.PacienteService;
 @RestController
 @RequestMapping("/pacientes")
 @CrossOrigin
@@ -20,18 +24,17 @@ public class PacienteController {
     public Paciente criar(@RequestBody Paciente paciente) {
         return service.salvar(paciente);
     }
-    @GetMapping("/by-id/{id}")
-    public Paciente getById(@PathVariable Long id) {
-        return service.getById(id);
-    }
-    @DeleteMapping("delete-by-id/{id}")
-    public void deleteById(@PathVariable Long id) {
-        service.deleteById(id);
-    }
     @GetMapping
     public List<Paciente> listar() {
         return service.listar();
     }
-    @PutMapping("/{id}")
-    public Paciente atualizar(@PathVariable Long id, @RequestBody Paciente paciente) { return service.atualizar(id, paciente); }
+    @GetMapping("/{id}")
+    public Paciente buscarPorId(@PathVariable Long id) {
+        return service.buscarPorId(id);
+    }
+    @GetMapping("/cpf/{cpf}")
+    public Paciente buscarPorCpf(@PathVariable String cpf) {
+        return service.buscarPorCpf(cpf)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("CPF não encontrado."));
+    }
 }
